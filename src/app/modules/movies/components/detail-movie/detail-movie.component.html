@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row" style="margin-top: 20px">
+    <div class="col-sm-6">
+      <img
+        src="https://image.tmdb.org/t/p/w500{{ detailMovie.poster_path }}"
+        class="img-fluid detail"
+        alt="..."
+      />
+    </div>
+    <div class="col-sm-6 my-auto">
+      <h1>{{ detailMovie.title }}</h1>
+      <span
+        class="badge badge-genre"
+        *ngFor="let genre of detailMovie.genres"
+        >{{ genre.name }}</span
+      >
+      <p style="margin-top: 20px">{{ detailMovie.overview }}</p>
+    </div>
+  </div>
+</div>
