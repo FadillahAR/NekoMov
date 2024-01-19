@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-sm-4 poster" *ngFor="let movie of listMovie">
+    <img
+      src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
+      class="img-fluid"
+    />
+    <div class="text-middle">
+      <h4>{{ movie.title }}</h4>
+      <h5>{{ movie.vote_average }}/10</h5>
+    </div>
+  </div>
+</div>

@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, take, takeUntil } from 'rxjs';
-import { MoviePopular, DetailMovie} from 'src/app/core/interfaces/movies.interface';
+import { Subject, takeUntil } from 'rxjs';
+import { DetailMovie, MoviePopular } from 'src/app/core/interfaces/movies.interface';
 import { MovieService } from 'src/app/core/services/movie.service';
 
 @Component({
-  selector: 'app-list-movie',
-  templateUrl: './list-movie.component.html',
-  styleUrls: ['./list-movie.component.scss'],
+  selector: 'app-popular-movie',
+  templateUrl: './popular-movie.component.html',
+  styleUrls: ['./popular-movie.component.scss']
 })
-export class ListMovieComponent implements OnInit, OnDestroy {
+export class PopularMovieComponent implements OnInit, OnDestroy {
   moviePopular: DetailMovie[] = [];
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(private movieService: MovieService, private router: Router) {}

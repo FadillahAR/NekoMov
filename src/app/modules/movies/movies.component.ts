@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   template: `
   <div>
     <app-navbar></app-navbar>
-    <app-list-movie></app-list-movie>
+    <app-popular-movie></app-popular-movie>
   </div>`,
 })
 export class HomeComponent {}
