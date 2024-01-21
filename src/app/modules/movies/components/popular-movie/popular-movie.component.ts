@@ -18,8 +18,6 @@ export class PopularMovieComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(
     private movieService: MovieService,
-    private router: Router,
-    private localService: LocalStorageService
   ) {}
 
   ngOnInit(): void {

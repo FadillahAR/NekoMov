@@ -23,12 +23,7 @@ export class FavoriteMovieComponent implements OnInit, OnDestroy {
   }
 
   getListFavoriteMovie() {
-    this.localService
-      .getItem('favorite-movie')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((movies: DetailMovie[]) => {
-        this.movieFavorite = movies || [];
-      });
+    this.movieFavorite = this.localService.getItem('favorite-movie');
   }
 
   onToggleFavorite(movie: DetailMovie) {
