@@ -2,9 +2,47 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
 
-## Development server
+## Prerequisites
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Before you begin, ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (includes npm)
+- [Angular CLI](https://angular.io/cli) (installed globally)
+
+## Getting Started
+
+Follow these steps to set up and run the project locally:
+
+1. **Clone the Repository:**
+
+    ```bash
+    git clone https://github.com/FadillahAR/NekoMov.git
+    cd this-project-folder
+    ```
+
+2. **Install Dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3. **Serve the Application:**
+
+    ```bash
+    ng serve
+    ```
+
+    Open your browser and navigate to `http://localhost:4200/` to view the application.
+
+## Mandatory Criteria
+
+1 - 12 : `Done`
+
+## Optional Task
+
+- Clean Code
+- Translate `ENG / ID`
+- Reuse Component
 
 ## Code scaffolding
 
