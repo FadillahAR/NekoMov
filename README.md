@@ -17,7 +17,7 @@ Follow these steps to set up and run the project locally:
 
     ```bash
     git clone https://github.com/FadillahAR/NekoMov.git
-    cd this-project-folder
+    cd NekoMov
     ```
 
 2. **Install Dependencies:**
