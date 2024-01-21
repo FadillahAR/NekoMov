@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-2 col-6">
       <a [routerLink]="['/movies']" class="btn btn-danger mb-3">
-        <i class="fas fa-arrow-left"></i> Back to Movies
+        <i class="fas fa-arrow-left"></i> {{ "navigation.back" | translate }}
       </a>
     </div>
     <div class="col-md-10">
@@ -20,16 +20,27 @@
             *ngFor="let genre of detailMovie.genres"
             class="badge badge-genre"
           >
-            {{ genre.name }}
+            {{ genreTitle(genre.name) | translate }}
           </div>
-          <p class="mt-3">{{ detailMovie.overview }}</p>
+          <p class="mt-3">{{ description(detailMovie.id) | translate }}</p>
+          <p class="txt" [class.favorite]="isFavorite">
+            {{
+              (isFavorite ? "navigation.favorite" : "navigation.unfavorite")
+                | translate
+            }}
+          </p>
           <button
             class="btn btn-fav"
             [class.unfavorite]="isFavorite"
             (click)="toggleFavoriteMovie(detailMovie, isFavorite)"
           >
             <i class="fa fa-heart"></i>
-            {{ isFavorite ? "Unfavorite" : "Mark as Favorite" }}
+            {{
+              (isFavorite
+                ? "navigation.unfavorite"
+                : "navigation.mark_as_favorite"
+              ) | translate
+            }}
           </button>
         </div>
       </div>

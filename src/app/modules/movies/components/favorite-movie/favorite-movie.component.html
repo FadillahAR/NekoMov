@@ -1,15 +1,20 @@
 <div class="container">
   <div class="row justify-content-center mt-4">
     <div class="col-12">
-      <a routerLink="/movies" class="btn btn-danger mb-3">Back to Movies</a>
+      <a routerLink="/movies" class="btn btn-danger mb-3">{{
+        "navigation.back" | translate
+      }}</a>
     </div>
     <div class="col-12 text-center">
-      <h1 class="display-4 mb-4">Favorite Movies</h1>
+      <h1 class="display-4 mb-4">{{ "title.favorite" | translate }}</h1>
     </div>
     <div class="col-12">
-      <app-list-movie [listMovie]="movieFavorite" (toggleFavorite)="onToggleFavorite($event)"></app-list-movie>
+      <app-list-movie
+        [listMovie]="movieFavorite"
+        (toggleFavorite)="onToggleFavorite($event)"
+      ></app-list-movie>
       <div *ngIf="movieFavorite.length === 0" class="text-center mt-3">
-        <p>No favorite movies available.</p>
+        <p>{{ "helper.no_data" | translate }}</p>
       </div>
     </div>
   </div>

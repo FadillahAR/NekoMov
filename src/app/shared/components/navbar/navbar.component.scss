@@ -1,0 +1,19 @@
+.btn-group {
+  margin-left: 10px;
+}
+
+.btn-language {
+  color: white;
+  background-color: #343a40;
+  border: 1px solid #343a40;
+}
+
+.btn-language:hover {
+  background-color: #495057;
+}
+
+.btn-language.active {
+  background-color: #e50914;
+  border-color: #e50914;
+  color: white;
+}

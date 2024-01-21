@@ -29,7 +29,7 @@
         />
         <div class="carousel-caption d-none d-md-block">
           <h5>{{ movie.original_title }}</h5>
-          <p>{{ movie.overview }}</p>
+          <p>{{ description(movie.id) | translate }}</p>
         </div>
       </div>
     </div>
@@ -54,7 +54,9 @@
   </div>
   <div class="container">
     <div class="row" style="padding: 20px">
-      <h1 style="margin: auto; padding: 20px">Trending:</h1>
+      <h1 style="margin: auto; padding: 20px">
+        {{ "title.trending" | translate }}
+      </h1>
       <app-list-movie [listMovie]="moviePopular"></app-list-movie>
     </div>
   </div>

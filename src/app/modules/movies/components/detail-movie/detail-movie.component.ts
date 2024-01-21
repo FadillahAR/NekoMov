@@ -11,15 +11,14 @@ import { MovieService } from 'src/app/core/services/movie.service';
   styleUrls: ['./detail-movie.component.scss'],
 })
 export class DetailMovieComponent implements OnInit, OnDestroy {
-  detailMovie:  DetailMovie | undefined;
+  detailMovie: DetailMovie | undefined;
   id: number = 0;
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(
     private movieService: MovieService,
     private route: ActivatedRoute,
     private localService: LocalStorageService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.route.params
@@ -51,7 +50,23 @@ export class DetailMovieComponent implements OnInit, OnDestroy {
   get isFavorite(): boolean {
     const favoriteMovie = this.localService.getItem('favorite-movie') || [];
     return this.detailMovie
-      ? favoriteMovie.some((val: DetailMovie) => val.id === this.detailMovie!.id)
+      ? favoriteMovie.some(
+          (val: DetailMovie) => val.id === this.detailMovie!.id
+        )
       : false;
+  }
+
+  genreTitle(name: string) {
+    let value = name.split(' ');
+    if (value.length > 1) {
+      const join = value.join('_');
+      return 'genre.' + join.toLocaleLowerCase();
+    } else {
+      return 'genre.' + name.toLowerCase();
+    }
+  }
+
+  description(id: number) {
+    return 'description.' + id;
   }
 }

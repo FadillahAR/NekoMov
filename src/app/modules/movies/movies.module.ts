@@ -7,6 +7,7 @@ import { FavoriteMovieComponent } from './components/favorite-movie/favorite-mov
 import { PopularMovieComponent } from './components/popular-movie/popular-movie.component';
 import { MoviesRoutingModule } from './movies-routing.module';
 import { HomeComponent } from './movies.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,6 @@ import { HomeComponent } from './movies.component';
     FavoriteMovieComponent,
     PopularMovieComponent,
   ],
-  imports: [CommonModule, MoviesRoutingModule, SharedModule],
+  imports: [CommonModule, MoviesRoutingModule, SharedModule, TranslateModule],
 })
 export class MoviesModule {}

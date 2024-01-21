@@ -67,6 +67,16 @@ h1 {
   transform: rotate(360deg);
 }
 
+.txt.favorite {
+  font-weight: bold;
+  color: #218838;
+}
+
+.txt {
+  font-weight: bold;
+  color: #c82333;
+}
+
 @media (max-width: 768px) {
   .col-md-2.col-6 {
     width: 100%;

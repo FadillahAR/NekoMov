@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
 import {
   DetailMovie,
@@ -15,10 +16,9 @@ import { MovieService } from 'src/app/core/services/movie.service';
 })
 export class PopularMovieComponent implements OnInit, OnDestroy {
   moviePopular: DetailMovie[] = [];
+  bannerMovie: DetailMovie[] = [];
   destroy$: Subject<boolean> = new Subject<boolean>();
-  constructor(
-    private movieService: MovieService,
-  ) {}
+  constructor(private movieService: MovieService) {}
 
   ngOnInit(): void {
     this.getListMoviePopular();
@@ -36,10 +36,17 @@ export class PopularMovieComponent implements OnInit, OnDestroy {
       .subscribe(
         (data: MoviePopular) => {
           this.moviePopular = data.results;
+          if (this.bannerMovie.length == 0) {
+            this.bannerMovie = this.moviePopular;
+          }
         },
         (error) => {
           console.error('Error fetching popular movies:', error);
         }
       );
+  }
+
+  description(id: number) {
+    return 'description.' + id;
   }
 }
