@@ -16,22 +16,24 @@
       </ng-container>
     </div>
     <div class="carousel-inner">
-      <div
-        *ngFor="let movie of moviePopular; let i = index"
-        class="carousel-item"
-        [class.active]="i === 0"
-        [attr.data-bs-interval]="(i + 1) * 2000"
-      >
-        <img
-          src="https://image.tmdb.org/t/p/original{{ movie.backdrop_path }}"
-          class="d-block w-100 banner"
-          alt="Movie Banner"
-        />
-        <div class="carousel-caption d-none d-md-block">
-          <h5>{{ movie.original_title }}</h5>
-          <p>{{ description(movie.id) | translate }}</p>
+      <ng-container *ngFor="let movie of moviePopular; let i = index">
+        <div
+          *ngIf="i <= 4"
+          class="carousel-item"
+          [class.active]="i === 0"
+          [attr.data-bs-interval]="(i + 1) * 2000"
+        >
+          <img
+            src="https://image.tmdb.org/t/p/original{{ movie.backdrop_path }}"
+            class="d-block w-100 banner"
+            alt="Movie Banner"
+          />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>{{ movie.original_title }}</h5>
+            <p>{{ description(movie.id) | translate }}</p>
+          </div>
         </div>
-      </div>
+      </ng-container>
     </div>
     <button
       class="carousel-control-prev"
