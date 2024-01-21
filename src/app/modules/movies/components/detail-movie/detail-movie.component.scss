@@ -1,6 +1,74 @@
+.container {
+  padding: 20px;
+}
+
+.row {
+  display: flex;
+}
+
+.col-sm-6 {
+  flex: 0 0 50%;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.detail {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.my-auto {
+  align-self: center;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
 
 .badge-genre {
-  background-color: #e50914;
-  padding: 8px !important;
   margin-right: 5px;
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-fav {
+  background-color: #28a745;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-fav:hover {
+  background-color: #218838;
+}
+
+.btn-fav.unfavorite {
+  background-color: #dc3545;
+}
+
+.btn-fav.unfavorite:hover {
+  background-color: #c82333;
+}
+
+.btn-fav i {
+  margin-right: 5px;
+  transition: transform 0.3s ease;
+}
+
+.btn-fav:hover i {
+  transform: rotate(360deg);
+}
+
+@media (max-width: 768px) {
+  .col-md-2.col-6 {
+    width: 100%;
+  }
 }

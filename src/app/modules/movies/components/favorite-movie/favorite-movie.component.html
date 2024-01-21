@@ -1,6 +1,16 @@
 <div class="container">
-  <div class="row" style="padding: 20px">
-    <h1 style="margin: auto; padding: 20px">Favorite Movie:</h1>
-    <app-list-movie [listMovie]="movieFavorite"></app-list-movie>
+  <div class="row justify-content-center mt-4">
+    <div class="col-12">
+      <a routerLink="/movies" class="btn btn-danger mb-3">Back to Movies</a>
+    </div>
+    <div class="col-12 text-center">
+      <h1 class="display-4 mb-4">Favorite Movies</h1>
+    </div>
+    <div class="col-12">
+      <app-list-movie [listMovie]="movieFavorite" (toggleFavorite)="onToggleFavorite($event)"></app-list-movie>
+      <div *ngIf="movieFavorite.length === 0" class="text-center mt-3">
+        <p>No favorite movies available.</p>
+      </div>
+    </div>
   </div>
 </div>

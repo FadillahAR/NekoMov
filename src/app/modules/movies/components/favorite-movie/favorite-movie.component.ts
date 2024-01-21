@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { DetailMovie } from 'src/app/core/interfaces/movies.interface';
-import { AccountService } from 'src/app/core/services/account.service';
-import { MovieService } from 'src/app/core/services/movie.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-favorite-movie',
@@ -12,7 +11,8 @@ import { MovieService } from 'src/app/core/services/movie.service';
 export class FavoriteMovieComponent implements OnInit, OnDestroy {
   movieFavorite: DetailMovie[] = [];
   destroy$: Subject<boolean> = new Subject<boolean>();
-  constructor(private accountService: AccountService) {}
+  constructor(private localService: LocalStorageService) {}
+
   ngOnInit(): void {
     this.getListFavoriteMovie();
   }
@@ -23,12 +23,15 @@ export class FavoriteMovieComponent implements OnInit, OnDestroy {
   }
 
   getListFavoriteMovie() {
-    this.accountService
-      .getListFavoriteMovie()
+    this.localService
+      .getItem('favorite-movie')
       .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        this.movieFavorite = data.results;
-        console.log(data)
+      .subscribe((movies: DetailMovie[]) => {
+        this.movieFavorite = movies || [];
       });
+  }
+
+  onToggleFavorite(movie: DetailMovie) {
+    this.movieFavorite = this.movieFavorite.filter((m) => m.id !== movie.id);
   }
 }

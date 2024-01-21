@@ -1,18 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { DetailMovie, MoviePopular } from 'src/app/core/interfaces/movies.interface';
+import {
+  DetailMovie,
+  MoviePopular,
+} from 'src/app/core/interfaces/movies.interface';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { MovieService } from 'src/app/core/services/movie.service';
 
 @Component({
   selector: 'app-popular-movie',
   templateUrl: './popular-movie.component.html',
-  styleUrls: ['./popular-movie.component.scss']
+  styleUrls: ['./popular-movie.component.scss'],
 })
 export class PopularMovieComponent implements OnInit, OnDestroy {
   moviePopular: DetailMovie[] = [];
   destroy$: Subject<boolean> = new Subject<boolean>();
-  constructor(private movieService: MovieService, private router: Router) {}
+  constructor(
+    private movieService: MovieService,
+    private router: Router,
+    private localService: LocalStorageService
+  ) {}
 
   ngOnInit(): void {
     this.getListMoviePopular();
@@ -27,12 +35,13 @@ export class PopularMovieComponent implements OnInit, OnDestroy {
     this.movieService
       .getlistMovie()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((data: MoviePopular) => {
-        this.moviePopular = data.results;
-      });
-  }
-
-  gotoDetail(id: number) {
-    this.router.navigate(['movies','detail', id]);
+      .subscribe(
+        (data: MoviePopular) => {
+          this.moviePopular = data.results;
+        },
+        (error) => {
+          console.error('Error fetching popular movies:', error);
+        }
+      );
   }
 }

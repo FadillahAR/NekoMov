@@ -1,20 +1,38 @@
-<div class="container">
-  <div class="row" style="margin-top: 20px">
-    <div class="col-sm-6">
-      <img
-        src="https://image.tmdb.org/t/p/w500{{ detailMovie.poster_path }}"
-        class="img-fluid detail"
-        alt="..."
-      />
+<div class="container" *ngIf="detailMovie">
+  <div class="row">
+    <div class="col-md-2 col-6">
+      <a [routerLink]="['/movies']" class="btn btn-danger mb-3">
+        <i class="fas fa-arrow-left"></i> Back to Movies
+      </a>
     </div>
-    <div class="col-sm-6 my-auto">
-      <h1>{{ detailMovie.title }}</h1>
-      <span
-        class="badge badge-genre"
-        *ngFor="let genre of detailMovie.genres"
-        >{{ genre.name }}</span
-      >
-      <p style="margin-top: 20px">{{ detailMovie.overview }}</p>
+    <div class="col-md-10">
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <img
+            src="https://image.tmdb.org/t/p/w500{{ detailMovie.poster_path }}"
+            class="img-fluid detail"
+            alt="Movie Poster"
+          />
+        </div>
+        <div class="col-md-6 my-auto">
+          <h1>{{ detailMovie.title }}</h1>
+          <div
+            *ngFor="let genre of detailMovie.genres"
+            class="badge badge-genre"
+          >
+            {{ genre.name }}
+          </div>
+          <p class="mt-3">{{ detailMovie.overview }}</p>
+          <button
+            class="btn btn-fav"
+            [class.unfavorite]="isFavorite"
+            (click)="toggleFavoriteMovie(detailMovie, isFavorite)"
+          >
+            <i class="fa fa-heart"></i>
+            {{ isFavorite ? "Unfavorite" : "Mark as Favorite" }}
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
