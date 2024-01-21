@@ -1,39 +1,56 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { URLPATH } from '../constant/url';
 import { Observable } from 'rxjs';
+import { MOVIE_BASE_URL, MOVIE_OPTIONS } from '../constant/environment';
+import { URLPATH } from '../constant/url';
 import { DetailMovie, MoviePopular } from '../interfaces/movies.interface';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MovieService {
-  private baseUrl = 'https://api.themoviedb.org/3/';
-  private apiKey =
-    'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZjBhYmFkNDU4ZDYxYWViMjI5NWU5YjdiMmRjNzU4NyIsInN1YiI6IjY1YTU0MmEyMGYyYWUxMDEzMDViNTA2ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.EUrLaIfzHeiM6mtPPZKskylijkCViuukCZc2_9dfUzs';
-  private options = {
-    headers: {
-      Authorization: `Bearer ${this.apiKey}`,
-    },
-  };
+  private baseUrl = MOVIE_BASE_URL;
+  private options = MOVIE_OPTIONS;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private localService: LocalStorageService
+  ) {}
 
   getlistMovie(): Observable<MoviePopular> {
-    return this.http.get(
-      this.baseUrl + URLPATH.ListMoviePopular,
-      this.options
-    ) as Observable<MoviePopular>;
+    const url = this.baseUrl + URLPATH.ListMoviePopular;
+    return this.http.get<MoviePopular>(url, this.options);
   }
 
-  getTrendingMovies() {
-    return this.http.get(
-      this.baseUrl + URLPATH.ListTrendingMovies,
-      this.options
-    );
+  getTrendingMovies(): Observable<any> {
+    const url = this.baseUrl + URLPATH.ListTrendingMovies;
+    return this.http.get(url, this.options);
   }
 
   getMovieByID(id: number): Observable<DetailMovie> {
-    return this.http.get(`${this.baseUrl}${URLPATH.DetailMovie}/${id}`, this.options) as Observable<DetailMovie>;
+    return this.http.get(
+      `${this.baseUrl}${URLPATH.DetailMovie}/${id}`,
+      this.options
+    ) as Observable<DetailMovie>;
+  }
+
+  addRemoveFavoriteMovie(movie: DetailMovie, isRemove: boolean = false) {
+    let favoriteMovie: DetailMovie[] =
+      this.localService.getItem('favorite-movie') || [];
+    const index = favoriteMovie.findIndex(
+      (val: DetailMovie) => val.id === movie.id
+    );
+    if (isRemove) {
+      if (index !== -1) {
+        favoriteMovie.splice(index, 1);
+      }
+    } else {
+      if (index === -1 || favoriteMovie.length === 0) {
+        favoriteMovie.push(movie);
+      }
+    }
+
+    this.localService.setItem('favorite-movie', favoriteMovie);
   }
 }

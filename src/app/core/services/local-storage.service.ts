@@ -5,25 +5,37 @@ import { Injectable } from '@angular/core';
 })
 export class LocalStorageService {
 
-  constructor() { 
-  }
+  constructor() { }
 
   private encrypt(value: string) {
-    return btoa(value);
+    return btoa(encodeURIComponent(value));
   }
 
   private decrypt(value: string | null) {
     if (!value || !value.length) return value;
-    return atob(value);
+    return decodeURIComponent(atob(value));
   }
 
-  setItem(key: string, value: string) {
-    localStorage.setItem(key, this.encrypt(value))
+  parse(value: any) {
+    try {
+      return JSON.parse(value);
+    } catch (error) {
+      return value;
+    }
+  }
+
+  toString(value: any) {
+    return JSON.stringify(value);
+  }
+
+  setItem(key: string, value: any) {
+    localStorage.setItem(key, this.encrypt(this.toString(value)));
   }
 
   getItem(key: string) {
-    const value = this.decrypt(localStorage.getItem(key))
-    return value;
+    const value = localStorage.getItem(key);
+    if (!value) return null; 
+    const decryptedValue = this.decrypt(value);
+    return this.parse(decryptedValue);
   }
-
 }
